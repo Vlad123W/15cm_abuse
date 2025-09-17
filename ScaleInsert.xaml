@@ -1,0 +1,126 @@
+﻿<Window x:Name="scaleInsertWindow"
+        x:Class="_15cm_abuse.ScaleInsert"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:_15cm_abuse"
+        mc:Ignorable="d"
+        Title="Set Scale" Height="180" Width="400"
+        Background="Transparent" AllowsTransparency="True" WindowStyle="None" ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        FocusManager.FocusedElement="{Binding ElementName=valueTextBox}"
+        KeyDown="scaleInsert_KeyDown">
+
+    <Window.Resources>
+        <SolidColorBrush x:Key="PrimaryBackgroundBrush" Color="#FF2D2D30"/>
+        <SolidColorBrush x:Key="SecondaryBackgroundBrush" Color="#FF3F3F41"/>
+        <SolidColorBrush x:Key="PrimaryBorderBrush" Color="#FF007ACC"/>
+        <SolidColorBrush x:Key="TextBrush" Color="#FFF1F1F1"/>
+        <SolidColorBrush x:Key="ButtonHoverBrush" Color="#FF3E3E40"/>
+        <SolidColorBrush x:Key="ButtonPressedBrush" Color="#FF005A9E"/>
+        <SolidColorBrush x:Key="CloseButtonHoverBrush" Color="#FFE81123"/>
+
+        <Style x:Key="ControlButton" TargetType="Button">
+            <Setter Property="Background" Value="{StaticResource SecondaryBackgroundBrush}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource PrimaryBorderBrush}"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="0">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource ButtonHoverBrush}"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource ButtonPressedBrush}"/>
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource ButtonPressedBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="CloseButton" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Width" Value="46"/>
+            <Setter Property="Height" Value="32"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border" Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="{StaticResource CloseButtonHoverBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+
+        <Style x:Key="DialogTextBox" TargetType="TextBox">
+            <Setter Property="Background" Value="{StaticResource PrimaryBackgroundBrush}" />
+            <Setter Property="Foreground" Value="{StaticResource TextBrush}" />
+            <Setter Property="BorderBrush" Value="#FF8A8A8A" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Padding" Value="5" />
+            <Setter Property="FontSize" Value="14"/>
+            <Setter Property="CaretBrush" Value="{StaticResource TextBrush}" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TextBox">
+                        <Border x:Name="border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="{StaticResource PrimaryBorderBrush}" />
+                                <Setter TargetName="border" Property="BorderThickness" Value="2"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+
+    <Border BorderBrush="{StaticResource PrimaryBorderBrush}" BorderThickness="1" Background="{StaticResource PrimaryBackgroundBrush}">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Grid x:Name="TitleBar" Grid.Row="0" Background="#FF3C3C3C" MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
+                <TextBlock Text="Set Scale" Foreground="{StaticResource TextBrush}" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10,0,0,0" FontSize="14"/>
+                <Button x:Name="exitButton" Style="{StaticResource CloseButton}" Content="✕" HorizontalAlignment="Right" VerticalAlignment="Center" Click="exit_Click" IsCancel="True"/>
+            </Grid>
+
+            <StackPanel Grid.Row="1" Margin="20">
+                <TextBlock Text="Enter the side length of the map grid square (in meters):" 
+                           Foreground="{StaticResource TextBrush}" 
+                           TextWrapping="Wrap" 
+                           Margin="0,0,0,10"/>
+
+                <TextBox x:Name="valueTextBox" Style="{StaticResource DialogTextBox}" />
+
+                <Button x:Name="confirmButton" Style="{StaticResource ControlButton}" Content="OK" Width="100" HorizontalAlignment="Right" Margin="0,15,0,0" Click="comfirm_Click" IsDefault="True"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>
