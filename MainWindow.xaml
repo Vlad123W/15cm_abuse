@@ -142,7 +142,6 @@
                         <Image x:Name="img"
                                MouseWheel="Img_MouseWheel"
                                MouseLeftButtonDown="Img_MouseLeftButtonDown"
-                               MouseLeave="Img_MouseLeave"
                                Stretch="Uniform">
                             <Image.RenderTransform>
                                 <ScaleTransform x:Name="ImageScale" ScaleX="1" ScaleY="1" CenterX="0.5" CenterY="0.5" />

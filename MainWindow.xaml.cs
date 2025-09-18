@@ -10,7 +10,7 @@ namespace _15cm_abuse
     public partial class MainWindow : Window
     {
         private readonly Values values;
-        private Distance distance;
+        private readonly Distance distance;
         private readonly List<Ellipse> _points = new();
         private Line? _line;
         private int _moveIndex = 0;
@@ -18,7 +18,7 @@ namespace _15cm_abuse
         private const double ZoomFactor = 0.1;
         private const double MaxZoom = 3.0;
         private const double MinZoom = 1;
-
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -66,11 +66,6 @@ namespace _15cm_abuse
 
         private void SetScale_Click(object sender, RoutedEventArgs e)
             => new ScaleInsert(values).ShowDialog();
-
-        private void Img_MouseLeave(object sender, MouseEventArgs e)
-        {
-            Cursor = Cursors.Arrow;
-        }
 
         private void TitleBar_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {

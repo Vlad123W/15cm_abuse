@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Windows; // Правильный Point
+using System.Windows;
 
 namespace _15cm_abuse
 {
